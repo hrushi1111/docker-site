@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    stages {
+        stage("code") {
+            steps {
+                git 'https://github.com/hrushi1111/docker-site.git'
+            }
+        }
+        stage("build") {
+            steps {
+                sh 'docker build -t hrushi html'
+            }
+        }
+        stage("deploy") {
+            steps {
+                sh 'docker run -itd --name hrushikesh -p 8081:80 hrushi'
+            }
+        }
+    }
+}
